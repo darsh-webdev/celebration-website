@@ -82,7 +82,16 @@ const NailcrediblesEnvelope = () => {
   return (
     <div>
       <h1 className="title">Dear Yashi Jain,</h1>
-      <p className="heading">Please click on the seal to open the envelope.</p>
+      {isOpened ? (
+        <p className="heading">
+          Congratulations!!!🎉🎉 <br />
+          We are super proud of you!
+        </p>
+      ) : (
+        <p className="heading">
+          Please click on the seal to open the envelope.
+        </p>
+      )}
       <div className={`envelope-container ${isOpened ? "opened" : ""}`}>
         <div className="envelope">
           <div className="envelope-body"></div>
