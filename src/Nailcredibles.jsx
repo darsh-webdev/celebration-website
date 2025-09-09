@@ -131,8 +131,8 @@ const testimonails = [
     content:
       "From the moment our paths intertwined, you filled my days with laughter and my nights with sweet dreams. Your love is a constant melody that plays softly in my heart, making every moment magical.",
     visible: true,
-    position: { x: 390, y: 0 },
-    zIndex: 10,
+    position: { x: 390, y: 30 },
+    zIndex: 1,
   },
   {
     id: 2,
@@ -140,8 +140,8 @@ const testimonails = [
     content:
       "Every shared glance and whispered secret adds another verse to our endless love song. You make even the simplest moments sparkle with joy and wonder, as if we're living in our very own romantic film.",
     visible: true,
-    position: { x: 390, y: 0 },
-    zIndex: 11,
+    position: { x: 390, y: 30 },
+    zIndex: 1,
   },
   {
     id: 3,
@@ -149,8 +149,8 @@ const testimonails = [
     content:
       "In your arms, I find both comfort and adventure. You are the calm in my storm and the spark that ignites my passion, turning every day into a delightful escapade full of surprises.",
     visible: true,
-    position: { x: 390, y: 0 },
-    zIndex: 12,
+    position: { x: 390, y: 30 },
+    zIndex: 1,
   },
 ];
 
@@ -159,7 +159,6 @@ const LoveLetters = () => {
   const [lettersVisible, setLettersVisible] = useState(false);
   const [letters, setLetters] = useState(testimonails);
 
-  const [zIndexCounter, setZIndexCounter] = useState(13);
   const [dragState, setDragState] = useState({
     isDragging: false,
     letterId: null,
@@ -168,23 +167,13 @@ const LoveLetters = () => {
 
   const lettersContainerRef = useRef(null);
 
-  // Shuffle array utility
-  const shuffleArray = (array) => {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
   // Initialize letter positions
   useEffect(() => {
-    const shuffledLetters = shuffleArray(letters);
+    const shuffledLetters = letters;
     setLetters(
       shuffledLetters.map((letter, index) => ({
         ...letter,
-        zIndex: 10 + index,
+        zIndex: 1,
       }))
     );
   }, []);
@@ -226,60 +215,13 @@ const LoveLetters = () => {
     if (e.target.tagName === "BUTTON") return;
 
     e.preventDefault();
-    const rect = e.currentTarget.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left;
-    const offsetY = e.clientY - rect.top;
-
-    setDragState({
-      isDragging: true,
-      letterId: letterId,
-      offset: { x: offsetX, y: offsetY },
-    });
-
     // Update z-index for the dragged letter
     setLetters((prev) =>
       prev.map((letter) =>
-        letter.id === letterId ? { ...letter, zIndex: zIndexCounter } : letter
-      )
-    );
-    setZIndexCounter((prev) => prev + 1);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!dragState.isDragging) return;
-
-    const newX = e.clientX - dragState.offset.x;
-    const newY = e.clientY - dragState.offset.y;
-
-    setLetters((prev) =>
-      prev.map((letter) =>
-        letter.id === dragState.letterId
-          ? { ...letter, position: { x: newX, y: newY } }
-          : letter
+        letter.id === letterId ? { ...letter, zIndex: 2 } : letter
       )
     );
   };
-
-  const handleMouseUp = () => {
-    setDragState({
-      isDragging: false,
-      letterId: null,
-      offset: { x: 0, y: 0 },
-    });
-  };
-
-  // Add global mouse event listeners for dragging
-  useEffect(() => {
-    if (dragState.isDragging) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
-      };
-    }
-  }, [dragState]);
 
   return (
     <div className="love-letters-app">
