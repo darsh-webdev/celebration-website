@@ -1,181 +1,18 @@
-// import { useState } from "react";
-
-// const NailcrediblesEnvelope = () => {
-//   const [isOpened, setIsOpened] = useState(false);
-//   const [flapOpened, setFlapOpened] = useState(false);
-//   const [cardShowing, setCardShowing] = useState(false);
-
-//   const handleSealClick = (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-
-//     if (isOpened) return;
-
-//     setIsOpened(true);
-//     setFlapOpened(true);
-
-//     // Add initial sparkles
-//     addSparkles(10);
-
-//     // Show card after flap opens
-//     setTimeout(() => {
-//       setCardShowing(true);
-//       dropConfetti(35);
-//       addSparkles(15);
-//     }, 800);
-//   };
-
-//   const handleCelebrate = (e) => {
-//     e.stopPropagation();
-//     dropConfetti(60);
-//     addSparkles(30);
-//   };
-
-//   const dropConfetti = (amount) => {
-//     const colors = [
-//       "#8b5cf6",
-//       "#ec4899",
-//       "#f59e0b",
-//       "#10b981",
-//       "#3b82f6",
-//       "#ef4444",
-//     ];
-
-//     for (let i = 0; i < amount; i++) {
-//       const confetti = document.createElement("div");
-//       confetti.className = "confetti";
-//       confetti.style.left = Math.random() * 100 + "vw";
-//       confetti.style.backgroundColor =
-//         colors[Math.floor(Math.random() * colors.length)];
-//       confetti.style.animationDelay = Math.random() * 1 + "s";
-//       confetti.style.animationDuration = 2 + Math.random() * 2 + "s";
-//       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-//       document.body.appendChild(confetti);
-
-//       setTimeout(() => {
-//         if (confetti.parentNode) {
-//           confetti.remove();
-//         }
-//       }, 4000);
-//     }
-//   };
-
-//   const addSparkles = (amount) => {
-//     for (let i = 0; i < amount; i++) {
-//       const sparkle = document.createElement("div");
-//       sparkle.className = "sparkle";
-//       sparkle.style.left = Math.random() * 100 + "vw";
-//       sparkle.style.top = Math.random() * 100 + "vh";
-//       sparkle.style.animationDelay = Math.random() * 2 + "s";
-
-//       document.body.appendChild(sparkle);
-
-//       setTimeout(() => {
-//         if (sparkle.parentNode) {
-//           sparkle.remove();
-//         }
-//       }, 2500);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h1 className="title">Dear Yashi Jain,</h1>
-//       {isOpened ? (
-//         <p className="heading">
-//           Congratulations!!!🎉🎉 <br />
-//           We are super proud of you!
-//         </p>
-//       ) : (
-//         <p className="heading">
-//           Please click on the seal to open the envelope.
-//         </p>
-//       )}
-//       <div className={`envelope-container ${isOpened ? "opened" : ""}`}>
-//         <div className="envelope">
-//           <div className="envelope-body"></div>
-//           <div className={`envelope-flap ${flapOpened ? "opened" : ""}`}></div>
-//           <div
-//             className={`wax-seal ${flapOpened ? "hidden" : ""}`}
-//             onClick={handleSealClick}
-//           >
-//             <div className="seal-logo"></div>
-//           </div>
-//           <div className={`card ${cardShowing ? "showing" : ""}`}>
-//             <h2>Congrats Nailcredibles! 💅 </h2>
-//             <p className="card-message">
-//               Happy 5 years to the most <strong>Nailcredible</strong> journey!
-//               Your dedication, creativity, and passion have truly made a mark.{" "}
-//               You didn't just build a brand, you <i>nailed</i> it!😉 Here's to
-//               many more fabulous years ahead!✨
-//             </p>
-//             <button className="celebrate-btn" onClick={handleCelebrate}>
-//               🎉 Tap to Celebrate 🎉
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default NailcrediblesEnvelope;
-
 import React, { useState, useEffect, useRef } from "react";
-
-const testimonails = [
-  {
-    id: 1,
-    author: "Amelia Rose",
-    content:
-      "From the moment our paths intertwined, you filled my days with laughter and my nights with sweet dreams. Your love is a constant melody that plays softly in my heart, making every moment magical.",
-    visible: true,
-    position: { x: 390, y: 30 },
-    zIndex: 1,
-  },
-  {
-    id: 2,
-    author: "Oliver James",
-    content:
-      "Every shared glance and whispered secret adds another verse to our endless love song. You make even the simplest moments sparkle with joy and wonder, as if we're living in our very own romantic film.",
-    visible: true,
-    position: { x: 390, y: 30 },
-    zIndex: 1,
-  },
-  {
-    id: 3,
-    author: "Isabella Grace",
-    content:
-      "In your arms, I find both comfort and adventure. You are the calm in my storm and the spark that ignites my passion, turning every day into a delightful escapade full of surprises.",
-    visible: true,
-    position: { x: 390, y: 30 },
-    zIndex: 1,
-  },
-];
+import useWindowDimensions from "./useWindowDimensions";
+import { testimonials } from "./testimonials";
 
 const LoveLetters = () => {
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
   const [lettersVisible, setLettersVisible] = useState(false);
-  const [letters, setLetters] = useState(testimonails);
-
-  const [dragState, setDragState] = useState({
-    isDragging: false,
-    letterId: null,
-    offset: { x: 0, y: 0 },
-  });
-
+  const [letters, setLetters] = useState(testimonials);
   const lettersContainerRef = useRef(null);
+  const { width } = useWindowDimensions();
 
   // Initialize letter positions
   useEffect(() => {
     const shuffledLetters = letters;
-    setLetters(
-      shuffledLetters.map((letter, index) => ({
-        ...letter,
-        zIndex: 1,
-      }))
-    );
+    setLetters(shuffledLetters.sort((a, b) => b.id - a.id));
   }, []);
 
   // Center letters initially
@@ -183,7 +20,7 @@ const LoveLetters = () => {
     if (lettersContainerRef.current) {
       const containerWidth =
         lettersContainerRef.current.parentElement.offsetWidth;
-      const letterWidth = 500; // --letter-x CSS variable value for desktop
+      const letterWidth = width <= 450 ? 320 : 550; // --letter-x CSS variable value for desktop
       const center = containerWidth / 2 - letterWidth / 2;
 
       setLetters((prev) =>
@@ -223,6 +60,60 @@ const LoveLetters = () => {
     );
   };
 
+  const handleCelebrate = (e) => {
+    e.stopPropagation();
+    dropConfetti(60);
+    addSparkles(30);
+  };
+
+  const dropConfetti = (amount) => {
+    const colors = [
+      "#8b5cf6",
+      "#ec4899",
+      "#f59e0b",
+      "#10b981",
+      "#3b82f6",
+      "#ef4444",
+    ];
+
+    for (let i = 0; i < amount; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.backgroundColor =
+        colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDelay = Math.random() * 1 + "s";
+      confetti.style.animationDuration = 2 + Math.random() * 2 + "s";
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        if (confetti.parentNode) {
+          confetti.remove();
+        }
+      }, 4000);
+    }
+  };
+
+  const addSparkles = (amount) => {
+    for (let i = 0; i < amount; i++) {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = Math.random() * 100 + "vw";
+      sparkle.style.top = Math.random() * 100 + "vh";
+      sparkle.style.animationDelay = Math.random() * 2 + "s";
+
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        if (sparkle.parentNode) {
+          sparkle.remove();
+        }
+      }, 2500);
+    }
+  };
+
   return (
     <div className="love-letters-app">
       <section className={`cssletter ${!envelopeOpen ? "greeting" : ""}`}>
@@ -253,12 +144,10 @@ const LoveLetters = () => {
 
         <div className="letters" ref={lettersContainerRef}>
           {lettersVisible &&
-            letters.map((letter) => (
+            letters.map((letter, index) => (
               <blockquote
                 key={letter.id}
-                className={`letter center ${
-                  dragState.letterId === letter.id ? "dragging" : ""
-                }`}
+                className={`letter center`}
                 id={letter.id.toString()}
                 tabIndex="0"
                 style={{
@@ -266,10 +155,8 @@ const LoveLetters = () => {
                   top: `${letter.position.y}px`,
                   zIndex: letter.zIndex,
                   display: letter.visible ? "flex" : "none",
-                  position:
-                    dragState.letterId === letter.id ? "fixed" : "absolute",
-                  cursor:
-                    dragState.letterId === letter.id ? "grabbing" : "grab",
+                  position: "absolute",
+                  cursor: "pointer",
                 }}
                 onMouseDown={(e) => handleMouseDown(e, letter.id)}
               >
@@ -281,7 +168,16 @@ const LoveLetters = () => {
                   Close {letter.author}'s letter
                 </button>
                 <p>{letter.content}</p>
-                <cite>{letter.author}</cite>
+
+                {index === 0 ? (
+                  <>
+                    <button className="celebrate-btn" onClick={handleCelebrate}>
+                      🎉 Tap to Celebrate 🎉
+                    </button>
+                  </>
+                ) : (
+                  <cite>{letter.author}</cite>
+                )}
               </blockquote>
             ))}
         </div>
