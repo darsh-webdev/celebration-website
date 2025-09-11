@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import useWindowDimensions from "./useWindowDimensions";
 import { testimonials } from "./testimonials";
 
-const LoveLetters = () => {
+const NailcrediblesEnvelope = () => {
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
   const [lettersVisible, setLettersVisible] = useState(false);
   const [letters, setLetters] = useState(testimonials);
@@ -144,7 +144,7 @@ const LoveLetters = () => {
 
         <div className="letters" ref={lettersContainerRef}>
           {lettersVisible &&
-            letters.map((letter, index) => (
+            letters.map((letter) => (
               <blockquote
                 key={letter.id}
                 className={`letter center`}
@@ -169,7 +169,7 @@ const LoveLetters = () => {
                 </button>
                 <p>{letter.content}</p>
 
-                {index === 0 ? (
+                {letter.id === 20 ? (
                   <>
                     <button className="celebrate-btn" onClick={handleCelebrate}>
                       🎉 Tap to Celebrate 🎉
@@ -186,4 +186,4 @@ const LoveLetters = () => {
   );
 };
 
-export default LoveLetters;
+export default NailcrediblesEnvelope;
