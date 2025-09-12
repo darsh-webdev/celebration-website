@@ -2,18 +2,31 @@ import React, { useState, useEffect, useRef } from "react";
 import useWindowDimensions from "./useWindowDimensions";
 import { testimonials } from "./testimonials";
 
+// Shuffle array utility
+const shuffleArray = (array) => {
+  // Get all items except the last one
+  const itemsToShuffle = array.slice(0, -1);
+  const lastItem = array[array.length - 1];
+
+  // Fisher-Yates shuffle for the items (excluding last)
+  for (let i = itemsToShuffle.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [itemsToShuffle[i], itemsToShuffle[j]] = [
+      itemsToShuffle[j],
+      itemsToShuffle[i],
+    ];
+  }
+
+  // Return shuffled items + last item
+  return [lastItem, ...itemsToShuffle];
+};
+
 const NailcrediblesEnvelope = () => {
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
   const [lettersVisible, setLettersVisible] = useState(false);
-  const [letters, setLetters] = useState(testimonials);
+  const [letters, setLetters] = useState(shuffleArray(testimonials));
   const lettersContainerRef = useRef(null);
   const { width } = useWindowDimensions();
-
-  // Initialize letter positions
-  useEffect(() => {
-    const shuffledLetters = letters;
-    setLetters(shuffledLetters.sort((a, b) => b.id - a.id));
-  }, []);
 
   // Center letters initially
   useEffect(() => {
@@ -30,7 +43,7 @@ const NailcrediblesEnvelope = () => {
         }))
       );
     }
-  }, []);
+  }, [width]);
 
   const handleOpenEnvelope = () => {
     setEnvelopeOpen(true);
@@ -149,7 +162,6 @@ const NailcrediblesEnvelope = () => {
                 key={letter.id}
                 className={`letter center`}
                 id={letter.id.toString()}
-                tabIndex="0"
                 style={{
                   left: `${letter.position.x}px`,
                   top: `${letter.position.y}px`,

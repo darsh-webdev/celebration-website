@@ -69,7 +69,7 @@ body {
 }
 
 .cssletter.greeting {
-  margin: 24dvh 0;
+  margin: 20dvh 0;
 }
 
 .envelope {
@@ -287,14 +287,6 @@ body {
 
 .letter cite::before {
   content: none;
-}
-
-.letter:nth-child(even) {
-  transform: skew(-2deg) translateY(-4px);
-}
-
-.letter:nth-child(odd) {
-  transform: skew(2deg) translateY(4px);
 }
 
 @media (min-width: 650px) {
