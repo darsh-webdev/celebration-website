@@ -279,6 +279,10 @@ body {
   flex-direction: column;
 }
 
+.letter-content {
+  padding-top: 0.2rem;
+}
+
 .letter cite {
   font-size: 2rem;
   color: var(--letter-text);
@@ -435,8 +439,12 @@ body {
   }
 
   .letter {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     line-height: 1.1;
+  }
+
+  .letter-content {
+    padding-top: 0.1rem !important;
   }
 
   .letter cite {

@@ -176,7 +176,7 @@ const NailcrediblesEnvelope = () => {
                 >
                   Close {letter.author}'s letter
                 </button>
-                <p>{letter.content}</p>
+                <p className="letter-content">{letter.content}</p>
 
                 {letter.id === 20 ? (
                   <>
