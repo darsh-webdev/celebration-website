@@ -282,7 +282,7 @@ body {
 .letter cite {
   font-size: 2rem;
   color: var(--letter-text);
-  margin-top: 1rem;
+  margin-top: 0;
 }
 
 .letter cite::before {

@@ -47,10 +47,7 @@ const NailcrediblesEnvelope = () => {
 
   const handleOpenEnvelope = () => {
     setEnvelopeOpen(true);
-    // Show letters after envelope animation completes (0.6s transition)
-    setTimeout(() => {
-      setLettersVisible(true);
-    }, 600);
+    setLettersVisible(true);
   };
 
   const handleCloseLetter = (letterId) => {
