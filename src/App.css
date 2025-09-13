@@ -258,7 +258,7 @@ body {
   user-select: none;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  padding: 3rem 1rem 1rem;
+  padding: 2.5rem 1rem 1rem;
   margin: 0;
   cursor: pointer;
   position: absolute;
@@ -277,10 +277,6 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.letter-content {
-  padding-top: 0.2rem;
 }
 
 .letter cite {
@@ -444,7 +440,7 @@ body {
   }
 
   .letter-content {
-    padding-top: 0.1rem !important;
+    padding-top: 4px !important;
   }
 
   .letter cite {
@@ -458,7 +454,7 @@ body {
   }
 
   .celebrate-btn {
-    padding: 8px 20px;
-    font-size: 12px;
+    padding: 6px 16px;
+    font-size: 0.65rem;
   }
 }

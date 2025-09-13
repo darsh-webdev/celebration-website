@@ -34,7 +34,7 @@ export const testimonials = [
   {
     id: 5,
     author: "Nayan Shah",
-    content: `From starting with zero clients to 5 amazing years as one of the best nail techs—your journey is incredible! 🌟💅 Despite health challenges, you never gave up and proved what true dedication looks like. So proud of you 🤍✨ This is just the beginning—may your success keep soaring! 📈💖`,
+    content: `From starting with zero clients to 5 amazing years as one of the best nail techs—your journey is incredible! 🌟💅 Despite health challenges, you never gave up and proved what true dedication looks like. So proud of you 🤍✨ This is just the beginning, may your success keep soaring! 📈💖`,
     visible: true,
     position: { x: 390, y: 30 },
     zIndex: 1,
@@ -42,7 +42,7 @@ export const testimonials = [
   {
     id: 20,
     author: "Darshan Rajput",
-    content: `Happy 5 years to the most Nailcredible journey! 💅 Your dedication, creativity, and passion have truly made a mark. You didn’t just build a brand, you nailed it! 😉 I’m so proud of everything you’ve achieved so far. Here’s to many more fabulous years ahead—and I hope the next five bring you even closer to your dream of opening your very own studio! ✨`,
+    content: `Happy 5 years to the most Nailcredible journey! 💅 Your dedication, creativity, and passion have truly made a mark. You didn’t just build a brand, you nailed it! 😉 I’m so proud of everything you’ve achieved so far. Here’s to many more fabulous years ahead and I hope the next five bring you even closer to your dream of opening your very own studio! ✨`,
     visible: true,
     position: { x: 390, y: 30 },
     zIndex: 1,
